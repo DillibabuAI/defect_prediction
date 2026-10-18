@@ -1,0 +1,218 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Software Defect Prediction</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <a href="{{ url_for('home') }}" class="brand">
+            <span class="brand-icon">D</span>
+            Defect<span>Predict</span>
+        </a>
+
+        <div class="nav-links">
+            <a href="{{ url_for('home') }}" class="active">Home</a>
+            <a href="#features">Features</a>
+            <a href="#about">About</a>
+        </div>
+
+        <a href="{{ url_for('predict') }}" class="nav-btn">
+            Get Started ↗
+        </a>
+    </nav>
+
+    <!-- Hero Section -->
+    <main class="hero">
+
+        <div class="hero-content">
+
+            <div class="tag">
+                <span class="status-dot"></span>
+                MACHINE LEARNING POWERED
+            </div>
+
+            <h1>
+                Predict Bugs.<br>
+                <span>Improve Quality.</span>
+            </h1>
+
+            <p class="hero-description">
+                Detect potential software defects before they become
+                problems. Analyze software metrics with our intelligent
+                machine learning prediction system.
+            </p>
+
+            <div class="hero-actions">
+                <a href="{{ url_for('predict') }}" class="btn">
+                    Start Prediction
+                    <span>→</span>
+                </a>
+
+                <a href="#features" class="secondary-btn">
+                    Explore Features ↓
+                </a>
+            </div>
+
+            <div class="trust-line">
+                <span class="check-icon">✓</span>
+                Data-driven analysis
+                <span class="separator">•</span>
+                Intelligent predictions
+            </div>
+
+        </div>
+
+        <!-- Code Illustration -->
+        <div class="hero-visual">
+
+            <div class="glow"></div>
+
+            <div class="code-card">
+
+                <div class="code-header">
+                    <div class="window-dots">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <span class="file-name">defect_analysis.py</span>
+                    <span class="code-symbol">⌘</span>
+                </div>
+
+                <div class="code-body">
+                    <div><span class="line-no">01</span>
+                        <span class="purple">import</span>
+                        <span class="blue"> sklearn</span>
+                    </div>
+
+                    <div><span class="line-no">02</span>
+                        <span class="purple">from</span>
+                        <span class="blue"> model</span>
+                        <span class="purple"> import</span>
+                        <span class="green"> AdaBoost</span>
+                    </div>
+
+                    <div class="empty-line">
+                        <span class="line-no">03</span>
+                    </div>
+
+                    <div><span class="line-no">04</span>
+                        <span class="comment"># Analyze software metrics</span>
+                    </div>
+
+                    <div><span class="line-no">05</span>
+                        <span class="white">prediction</span>
+                        <span class="pink"> = </span>
+                        <span class="green">model.predict</span><span class="white">(metrics)</span>
+                    </div>
+
+                    <div class="empty-line">
+                        <span class="line-no">06</span>
+                    </div>
+
+                    <div><span class="line-no">07</span>
+                        <span class="purple">print</span><span class="white">(prediction)</span>
+                    </div>
+
+                    <div class="prediction-status">
+                        <span class="status-dot"></span>
+                        MODEL READY
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="floating-card floating-top">
+                <span class="float-icon">✦</span>
+                <div>
+                    <strong>AI Powered</strong>
+                    <small>Smart analysis</small>
+                </div>
+            </div>
+
+            <div class="floating-card floating-bottom">
+                <span class="float-icon shield">✓</span>
+                <div>
+                    <strong>Quality Insights</strong>
+                    <small>Defect detection</small>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+
+        <div class="section-heading">
+            <span class="section-tag">WHAT WE OFFER</span>
+            <h2>Smarter Testing Starts Here</h2>
+            <p>Powerful features to help you understand software quality.</p>
+        </div>
+
+        <div class="feature-grid">
+
+            <div class="feature-card">
+                <div class="feature-icon purple-bg">⌘</div>
+                <h3>Metric Analysis</h3>
+                <p>Evaluate software metrics to identify patterns associated with defects.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon blue-bg">✧</div>
+                <h3>ML Predictions</h3>
+                <p>Use a trained AdaBoost model to estimate potential software defects.</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon green-bg">✓</div>
+                <h3>Quality Insights</h3>
+                <p>Get prediction results that support better software quality decisions.</p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="about">
+        <div class="about-content">
+            <span class="section-tag">ABOUT THE PROJECT</span>
+            <h2>Building Better Software with Machine Learning</h2>
+            <p>
+                This project applies machine learning techniques to software
+                metrics to help identify modules that may contain defects.
+                Enter the required metrics and let the trained model generate
+                a prediction.
+            </p>
+            <a href="{{ url_for('predict') }}" class="btn">
+                Try It Now →
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <a href="{{ url_for('home') }}" class="footer-brand">
+            Defect<span>Predict</span>
+        </a>
+        <p>Software Defect Prediction · Powered by Machine Learning</p>
+        <span class="footer-copy">Built for smarter software quality.</span>
+    </footer>
+
+</body>
+</html>
+```

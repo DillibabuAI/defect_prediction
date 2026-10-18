@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Prediction Result | DefectPredict</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+</head>
+
+<body class="result-page">
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+
+        <a href="{{ url_for('home') }}" class="brand">
+            <span class="brand-icon">D</span>
+            Defect<span>Predict</span>
+        </a>
+
+        <div class="nav-links">
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('predict') }}">Prediction</a>
+        </div>
+
+        <div class="nav-status">
+            <span class="status-dot"></span>
+            Analysis Complete
+        </div>
+
+    </nav>
+
+    <!-- Result Section -->
+    <main class="result-container">
+
+        <div class="result-card">
+
+            <!-- Completion Badge -->
+            <div class="success-badge">
+                <span class="status-dot"></span>
+                PREDICTION COMPLETED SUCCESSFULLY
+            </div>
+
+            <!-- Result Icon -->
+            <div class="result-icon">
+                <div class="icon-ring">
+                    <span>✓</span>
+                </div>
+            </div>
+
+            <!-- Heading -->
+            <p class="eyebrow">MACHINE LEARNING REPORT</p>
+
+            <h1>
+                Your Prediction<br>
+                <span>Results Are Ready.</span>
+            </h1>
+
+            <p class="result-description">
+                Your software metrics have been processed by the trained
+                AdaBoost classifier. Here is the predicted outcome.
+            </p>
+
+            <!-- Prediction Result -->
+            {% if prediction|string == '1' %}
+
+                <div class="prediction-status defect">
+
+                    <div class="status-symbol">!</div>
+
+                    <div class="status-content">
+                        <span class="result-label">PREDICTION OUTCOME</span>
+                        <h2>Potential Defect Detected</h2>
+                        <p>
+                            The model classified the software module
+                            as belonging to class 1.
+                        </p>
+                    </div>
+
+                    <div class="outcome-tag defect-tag">
+                        Defect
+                    </div>
+
+                </div>
+
+            {% elif prediction|string == '0' %}
+
+                <div class="prediction-status no-defect">
+
+                    <div class="status-symbol">✓</div>
+
+                    <div class="status-content">
+                        <span class="result-label">PREDICTION OUTCOME</span>
+                        <h2>No Defect Predicted</h2>
+                        <p>
+                            The model classified the software module
+                            as belonging to class 0.
+                        </p>
+                    </div>
+
+                    <div class="outcome-tag safe-tag">
+                        No Defect
+                    </div>
+
+                </div>
+
+            {% else %}
+
+                <div class="prediction-status neutral">
+
+                    <div class="status-symbol">i</div>
+
+                    <div class="status-content">
+                        <span class="result-label">PREDICTION OUTCOME</span>
+                        <h2>Predicted Class: {{ prediction }}</h2>
+                        <p>
+                            Please verify the target-label encoding
+                            used in your training dataset.
+                        </p>
+                    </div>
+
+                </div>
+
+            {% endif %}
+
+            <!-- Summary Cards -->
+            <div class="result-summary">
+
+                <div class="summary-item">
+                    <div class="summary-icon purple-summary">⌘</div>
+                    <div>
+                        <span>ML Algorithm</span>
+                        <strong>AdaBoost</strong>
+                    </div>
+                </div>
+
+                <div class="summary-item">
+                    <div class="summary-icon blue-summary">✧</div>
+                    <div>
+                        <span>Analysis Type</span>
+                        <strong>Defect Prediction</strong>
+                    </div>
+                </div>
+
+                <div class="summary-item">
+                    <div class="summary-icon green-summary">✓</div>
+                    <div>
+                        <span>Report Status</span>
+                        <strong>Completed</strong>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Information Notice -->
+            <div class="result-note">
+                <div class="note-icon">ⓘ</div>
+
+                <div>
+                    <strong>Understanding Your Result</strong>
+
+                    <p>
+                        This result was generated using your trained
+                        AdaBoost classifier. Verify that class 1 represents
+                        defective software and class 0 represents
+                        non-defective software in your dataset.
+                        A prediction is an estimate, not a guarantee
+                        of actual software quality.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="result-actions">
+
+                <a href="{{ url_for('predict') }}"
+                   class="btn btn-primary">
+                    <span>↻</span>
+                    Predict Again
+                    <span class="button-arrow">→</span>
+                </a>
+
+                <a href="{{ url_for('home') }}"
+                   class="btn btn-secondary">
+                    ← Back to Home
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- Footer -->
+        <footer class="result-footer">
+            <a href="{{ url_for('home') }}" class="footer-brand">
+                Defect<span>Predict</span>
+            </a>
+
+            <p>
+                SOFTWARE DEFECT PREDICTION · POWERED BY MACHINE LEARNING
+            </p>
+        </footer>
+
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,198 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Predict Software Defects | DefectPredict</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet">
+</head>
+
+<body class="predict-page">
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="{{ url_for('home') }}" class="brand">
+            <span class="brand-icon">D</span>
+            Defect<span>Predict</span>
+        </a>
+
+        <div class="nav-links">
+            <a href="{{ url_for('home') }}">Home</a>
+            <a href="{{ url_for('predict') }}" class="active">Prediction</a>
+        </div>
+
+        <div class="nav-status">
+            <span class="status-dot"></span>
+            ML Model
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="prediction-wrapper">
+
+        <section class="prediction-heading">
+
+            <div class="tag">
+                <span class="status-dot"></span>
+                PREDICTION MODULE
+            </div>
+
+            <h1>
+                Analyze Your Software<br>
+                <span>Predict Potential Defects.</span>
+            </h1>
+
+            <p class="heading-description">
+                Enter the software metrics below to analyze your module
+                using our trained AdaBoost machine learning model.
+            </p>
+
+            <div class="progress-info">
+                <span class="progress-icon">✦</span>
+                <span>10 input features</span>
+                <span class="progress-divider">•</span>
+                <span>Range-validated inputs</span>
+            </div>
+
+        </section>
+
+        <!-- Prediction Form Card -->
+        <section class="form-card">
+
+            <div class="form-card-header">
+                <div>
+                    <span class="section-tag">MODEL INPUTS</span>
+                    <h2>Software Metrics</h2>
+                    <p>Enter a value for each required feature.</p>
+                </div>
+
+                <div class="metric-count">
+                    <strong>{{ features|length }}</strong>
+                    <span>Features</span>
+                </div>
+            </div>
+
+            {% if error %}
+                <div class="error" role="alert">
+                    <span class="error-icon">!</span>
+                    <div>
+                        <strong>Prediction Error</strong>
+                        <p>{{ error }}</p>
+                    </div>
+                </div>
+            {% endif %}
+
+            <form action="{{ url_for('predict') }}" method="POST">
+
+                <div class="metrics-grid">
+
+                    {% for feature in features %}
+
+                    <div class="metric-field">
+
+                        <div class="field-heading">
+                            <label for="{{ feature }}">
+                                {{ expanded_names.get(feature, feature) }}
+                            </label>
+
+                            <span class="required-badge">Required</span>
+                        </div>
+
+                        <p class="range">
+                            <span class="range-icon">↔</span>
+                            Allowed range
+                            <strong>{{ "%.2f"|format(lower[feature]) }}</strong>
+                            <span class="range-to">to</span>
+                            <strong>{{ "%.2f"|format(upper[feature]) }}</strong>
+                        </p>
+
+                        <div class="input-wrapper">
+                            <input
+                                type="number"
+                                id="{{ feature }}"
+                                name="{{ feature }}"
+                                min="{{ lower[feature] }}"
+                                max="{{ upper[feature] }}"
+                                step="any"
+                                value="{{ request.form.get(feature, medians[feature]) }}"
+                                placeholder="Enter metric value"
+                                aria-label="{{ expanded_names.get(feature, feature) }}"
+                                required
+                            >
+
+                            <span class="input-check">✓</span>
+                        </div>
+
+                        <p class="field-hint">
+                            Enter a value within the allowed range.
+                        </p>
+
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+                <div class="form-notice">
+                    <span class="notice-icon">ⓘ</span>
+                    <p>
+                        Please verify all metric values before submitting.
+                        Inputs are checked against the displayed ranges.
+                    </p>
+                </div>
+
+                <div class="form-actions">
+
+                    <a href="{{ url_for('home') }}" class="back-btn">
+                        ← Back to Home
+                    </a>
+
+                    <button type="submit" class="predict-btn">
+                        <span>Predict Defect</span>
+                        <span class="button-arrow">→</span>
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+        <!-- Bottom Information -->
+        <div class="bottom-info">
+            <div class="info-item">
+                <span class="info-check">✓</span>
+                <span>Machine Learning Analysis</span>
+            </div>
+
+            <div class="info-item">
+                <span class="info-check">✓</span>
+                <span>Automated Prediction</span>
+            </div>
+
+            <div class="info-item">
+                <span class="info-check">✓</span>
+                <span>Software Quality Insights</span>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="prediction-footer">
+        <a href="{{ url_for('home') }}" class="footer-brand">
+            Defect<span>Predict</span>
+        </a>
+
+        <p>Software Defect Prediction · Powered by Machine Learning</p>
+    </footer>
+
+</body>
+</html>
+```
